@@ -17,12 +17,13 @@ runs:
       run: |
         import yaml
         import os
+        import json
 
         with open("${{ inputs.filepath }}", 'r') as f:
           config_file = yaml.safe_load(f)
 
         outputs = dict()
-        outputs['data'] = str(config_file)
+        outputs['data'] = json.dumps(config_file)
 
         if "GITHUB_OUTPUT" in os.environ:
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
